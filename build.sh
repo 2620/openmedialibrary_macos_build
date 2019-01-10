@@ -11,13 +11,20 @@ pyversion=3.7.2
 export PATH="$BREW/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
 export HOMEBREW_NO_ANALYTICS=1
 
-brew install openssl
-brew install sqlite
-brew install xz
-brew install zlib
-brew install readline
-brew install libxml2
-brew install libxslt
+function brew_install {
+    pkg=$1
+    brew list | grep -q $pkg || brew install $pkg
+    brew outdated $pkg || brew upgrade $pkg
+}
+
+brew update
+brew_install openssl
+brew_install sqlite
+brew_install xz
+brew_install zlib
+brew_install readline
+brew_install libxml2
+brew_install libxslt
 
 # Python
 CPPFLAGS="-I$BREW/opt/openssl/include/openssl"
@@ -149,5 +156,5 @@ for plib in \
     fi
 done
 
-tar cjf ${PREFIX}.tar.bz2 ${PREFIX}
-ls -lah ${PREFIX}.tar.bz2
+tar cvzf ${PREFIX}.tar.gz ${PREFIX}
+ls -lah ${PREFIX}.tar.gz
