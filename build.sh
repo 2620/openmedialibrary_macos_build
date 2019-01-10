@@ -158,4 +158,4 @@ for plib in \
 done
 
 tar cjf ${PREFIX}.tar.bz2 ${PREFIX}
-
+ls -lah ${PREFIX}.tar.bz2
