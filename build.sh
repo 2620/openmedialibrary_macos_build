@@ -5,7 +5,7 @@ set -e
 BREW="`pwd`/brew"
 PREFIX="`pwd`/platform_darwin64"
 # https://docs.travis-ci.com/user/reference/osx
-OSXVERSION=10.10
+OSXVERSION=10.11
 pyversion=3.7.2
 
 export PATH="$BREW/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
@@ -18,20 +18,14 @@ if [ ! -e $BREW ]; then
 fi
 brew update
 
-function brew_install {
-    pkg=$1
-    brew list | grep -q $pkg || brew install $pkg
-    brew outdated $pkg || brew upgrade $pkg
-}
+brew install openssl
+brew install sqlite
+brew install xz
+brew install zlib
+brew install readline
 
-brew_install openssl
-brew_install sqlite
-brew_install xz
-brew_install zlib
-brew_install readline
-
-brew_install libxml2
-brew_install libxslt
+brew install libxml2
+brew install libxslt
 
 # Python
 CPPFLAGS="-I$BREW/opt/openssl/include/openssl"
@@ -163,5 +157,5 @@ for plib in \
     fi
 done
 
-tar cjf ${PREFIX}.tar.bz ${PREFIX}
+tar cjf ${PREFIX}.tar.bz2 ${PREFIX}
 
