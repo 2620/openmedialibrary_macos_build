@@ -26,6 +26,9 @@ brew_install readline
 brew_install libxml2
 brew_install libxslt
 
+ls -lah  $BREW/opt/zlib/lib
+
+
 # Python
 CPPFLAGS="-I$BREW/opt/openssl/include/openssl"
 LDFLAGS=""
@@ -52,7 +55,12 @@ for lib in \
 ; do
     target="$PREFIX/lib/`basename "$lib"`"
     rm -f "$target"
-    cp -a "$BREW/$lib" "$target"
+    if [ -e "$BREW/$lib" ]; then
+        cp -a "$BREW/$lib" "$target"
+    else
+        echo "!! $BREW/$lib missing"
+        ls -la `dirname "$BREW/$lib"` || true
+    fi
 done
 
 url="https://www.python.org/ftp/python/${pyversion}/Python-${pyversion}.tar.xz"
