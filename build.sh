@@ -2,7 +2,7 @@
 cd `dirname $0`
 set -e
 
-BREW="`pwd`/brew"
+BREW="/usr/local"
 PREFIX="`pwd`/platform_darwin64"
 # https://docs.travis-ci.com/user/reference/osx
 OSXVERSION=10.11
@@ -10,20 +10,12 @@ pyversion=3.7.2
 
 export PATH="$BREW/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
 export HOMEBREW_NO_ANALYTICS=1
-export HOMEBREW_CACHE="$HOME/Library/Caches/Homebrew"
-
-if [ ! -e $BREW ]; then
-    mkdir -p $BREW
-    curl -L https://github.com/Homebrew/homebrew/tarball/master | tar xz --strip 1 -C $BREW
-fi
-brew update
 
 brew install openssl
 brew install sqlite
 brew install xz
 brew install zlib
 brew install readline
-
 brew install libxml2
 brew install libxslt
 
