@@ -2,9 +2,10 @@ os: osx
 osx_image: xcode8
 sudo: required
 language: generic
+
 install:
-- "./build.sh"
-tags: true
+    - "./build.sh"
+
 deploy:
   provider: releases
   api_key:

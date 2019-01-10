@@ -3,7 +3,9 @@ cd `dirname $0`
 set -e
 
 BREW="/usr/local"
-PREFIX="`pwd`/platform_darwin64"
+BASE="`pwd`"
+NAME="platform_darwin64"
+PREFIX="$BASE/$NAME"
 # https://docs.travis-ci.com/user/reference/osx
 OSXVERSION=10.11
 pyversion=3.7.2
@@ -165,5 +167,6 @@ for plib in \
     fi
 done
 
-tar cvzf ${PREFIX}.tar.gz ${PREFIX}
+cd ${BASE}
+tar cvzf ${PREFIX}.tar.gz ${NAME}
 ls -lah ${PREFIX}.tar.gz
