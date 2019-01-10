@@ -26,7 +26,8 @@ brew_install readline
 brew_install libxml2
 brew_install libxslt
 
-ls -lah  $BREW/opt/zlib/lib
+ls -lah  $BREW/opt/zlib/lib || brew reinstall zlib || true
+ls -lah  $BREW/opt/zlib/lib || true
 
 
 # Python
