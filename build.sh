@@ -168,5 +168,5 @@ for plib in \
 done
 
 cd ${BASE}
-tar cvzf ${PREFIX}.tar.gz ${NAME}
+tar czf ${PREFIX}.tar.gz ${NAME}
 ls -lah ${PREFIX}.tar.gz
