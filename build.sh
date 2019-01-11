@@ -168,5 +168,15 @@ for plib in \
 done
 
 cd ${BASE}
+curl -sO https://www.torproject.org/dist/torbrowser/8.0.4/TorBrowser-8.0.4-osx64_en-US.dmg
+hdiutil attach TorBrowser-8.0.4-osx64_en-US.dmg
+ls -la /Volumes
+
+TORPATH="`ls /Volumes/|grep Tor|head -1`"
+ls -la "$TORPATH/Tor Browser.app/Contents/MacOS/Tor/"
+cp -r "$TORPATH/Tor Browser.app/Contents/MacOS/Tor/" "$PREFIX/tor"
+rm -r "$PREFIX/tor/PluggableTransports"
+
+cd ${BASE}
 tar czf ${PREFIX}.tar.gz ${NAME}
 ls -lah ${PREFIX}.tar.gz
