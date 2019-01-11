@@ -170,12 +170,14 @@ done
 cd ${BASE}
 curl -sLO https://dist.torproject.org/torbrowser/8.0.4/TorBrowser-8.0.4-osx64_en-US.dmg
 hdiutil attach ${BASE}/TorBrowser-8.0.4-osx64_en-US.dmg
-ls -la /Volumes
 
-TORPATH="`ls /Volumes/|grep Tor|head -1`"
+TORPATH="/Volumes/Tor Browser"
+ls -la "$TORPATH"
 ls -la "$TORPATH/Tor Browser.app/Contents/MacOS/Tor/"
 cp -r "$TORPATH/Tor Browser.app/Contents/MacOS/Tor/" "$PREFIX/tor"
 rm -r "$PREFIX/tor/PluggableTransports"
+
+hdiutil detach /dev/disk1
 
 cd ${BASE}
 tar czf ${PREFIX}.tar.gz ${NAME}
