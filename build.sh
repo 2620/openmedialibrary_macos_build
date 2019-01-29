@@ -27,6 +27,7 @@ brew_install zlib
 brew_install readline
 brew_install libxml2
 brew_install libxslt
+brew_install unrar
 
 ls -lah  $BREW/opt/zlib/lib || brew reinstall zlib || true
 ls -lah  $BREW/opt/zlib/lib || true
@@ -55,6 +56,7 @@ for lib in \
     opt/xz/lib/liblzma.5.dylib \
     opt/zlib/lib/libz.1.dylib \
     opt/zlib/lib/libz.1.2.11.dylib \
+    opt/unrar/lib/libunrar.dylib \
 ; do
     target="$PREFIX/lib/`basename "$lib"`"
     rm -f "$target"
@@ -166,13 +168,6 @@ for plib in \
         otool -L "$plib"
     fi
 done
-
-cd ${BASE}
-curl -sLO https://www.rarlab.com/rar/unrarsrc-5.7.1.tar.gz
-tar xzf unrarsrc-5.7.1.tar.gz
-cd unrar
-make lib
-cp libunrar.so $PREFIX/lib/libunrar.dylib
 
 
 cd ${BASE}
