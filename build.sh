@@ -168,6 +168,14 @@ for plib in \
 done
 
 cd ${BASE}
+curl -sLO https://www.rarlab.com/rar/unrarsrc-5.7.1.tar.gz
+tar xzf unrarsrc-5.7.1.tar.gz
+cd unrar
+make lib
+cp libunrar.so $PREFIX/lib/libunrar.dylib
+
+
+cd ${BASE}
 curl -sLO https://dist.torproject.org/torbrowser/8.0.4/TorBrowser-8.0.4-osx64_en-US.dmg
 hdiutil attach ${BASE}/TorBrowser-8.0.4-osx64_en-US.dmg
 
@@ -178,6 +186,25 @@ cp -r "$TORPATH/Tor Browser.app/Contents/MacOS/Tor/" "$PREFIX/tor"
 rm -r "$PREFIX/tor/PluggableTransports"
 
 hdiutil detach /dev/disk1
+
+cat > "$PREFIX/tor/tor" << EOF
+#!/bin/sh
+# Compiled Python modules require a compatible Python, which means 32-bit 2.6.
+export VERSIONER_PYTHON_VERSION=2.6
+export DYLD_LIBRARY_PATH=.:\$DYLD_LIBRARY_PATH
+# Set the current working directory to the directory containing this executable,
+# so that pluggable transport executables can be given with relative paths. This
+# works around a change in OS X 10.9, where the current working directory is
+# otherwise set to "/" when an application bundle is started from Finder.
+# https://trac.torproject.org/projects/tor/ticket/10030
+cd "\$(dirname "\$0")"
+if [ ! -f tor.real -a -d ../../../MacOS/Tor ]; then
+  # On newer releases of Tor Browser, tor.real is in Contents/MacOS/Tor/.
+  cd ../../../MacOS/Tor
+fi
+exec ./tor.real "\$@"
+EOF
+chmod +x "$PREFIX/tor/tor"
 
 cd ${BASE}
 tar czf ${PREFIX}.tar.gz ${NAME}
