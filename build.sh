@@ -171,8 +171,8 @@ done
 
 
 cd ${BASE}
-curl -sLO https://dist.torproject.org/torbrowser/8.0.4/TorBrowser-8.0.4-osx64_en-US.dmg
-hdiutil attach ${BASE}/TorBrowser-8.0.4-osx64_en-US.dmg
+curl -sLO https://dist.torproject.org/torbrowser/8.0.5/TorBrowser-8.0.5-osx64_en-US.dmg
+hdiutil attach ${BASE}/TorBrowser-8.0.5-osx64_en-US.dmg
 
 TORPATH="/Volumes/Tor Browser"
 ls -la "$TORPATH"
