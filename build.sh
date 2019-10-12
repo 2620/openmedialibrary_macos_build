@@ -8,7 +8,7 @@ NAME="platform_darwin64"
 PREFIX="$BASE/$NAME"
 # https://docs.travis-ci.com/user/reference/osx
 OSXVERSION=10.11
-pyversion=3.7.2
+pyversion=3.7.5
 
 export PATH="$BREW/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
 export HOMEBREW_NO_ANALYTICS=1
@@ -171,8 +171,8 @@ done
 
 
 cd ${BASE}
-curl -sLO https://dist.torproject.org/torbrowser/8.0.5/TorBrowser-8.0.5-osx64_en-US.dmg
-hdiutil attach ${BASE}/TorBrowser-8.0.5-osx64_en-US.dmg
+curl -sLO https://dist.torproject.org/torbrowser/8.5.6/TorBrowser-8.5.6-osx64_en-US.dmg
+hdiutil attach ${BASE}/TorBrowser-8.5.6-osx64_en-US.dmg
 
 TORPATH="/Volumes/Tor Browser"
 ls -la "$TORPATH"
